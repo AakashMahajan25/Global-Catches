@@ -1,5 +1,6 @@
 // Import Statements
 import express from 'express';
+import errorHandler from './middlewares/errorHandler.mjs';
 
 // Configurations
 const app = express();
@@ -19,10 +20,8 @@ app.post('/api/v1/postData', (req, res) => {
 })
 
 
-// Global Catches
-app.use((error, req, res, next) => {
-    res.status(500).send('An Internal Server Error has Occurred.');
-})
+// Global Catches (Error Handling Middleware)
+app.use(errorHandler);
 
 app.listen(3000, () => {
     console.log('App listening on port 3000');
